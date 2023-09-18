@@ -9,13 +9,18 @@ import { CarRepository } from './car.repository';
 
 @Injectable()
 export class CarService {
-
   constructor(
     @InjectRepository(Car)
-    private readonly repo: Repository<Car>) { }
+    private readonly repo: Repository<Car>,
+  ) {}
 
-  create(createCarDto: CreateCarDto) {
-    return createCarDto;   
+  async create(createCarDto: CreateCarDto) {
+    const car = this.repo.create();
+    Object.entries(createCarDto).forEach(([key, value]) => {
+      car[key] = value;
+    });
+    await this.repo.save(car);
+    return car;
   }
 
   findAll() {
@@ -23,7 +28,7 @@ export class CarService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} car`;
+    return this.findOne(id);
   }
 
   update(id: number, updateCarDto: UpdateCarDto) {
