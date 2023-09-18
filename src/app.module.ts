@@ -5,6 +5,7 @@ import { CarModule } from './car/car.module';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FormModule } from './form/form.module';
 
 
 @Module({
@@ -15,7 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRootAsync({
       useClass: PostgresConfigService,
     }),
-    CarModule
+    CarModule,
+    FormModule
   ],
   controllers: [AppController],
   providers: [AppService],
