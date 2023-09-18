@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CarService } from './car.service';
 import { CarController } from './car.controller';
-import { CarRepository } from './car.repository';
 import { Car } from './entities/car.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
