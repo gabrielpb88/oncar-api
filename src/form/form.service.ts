@@ -27,8 +27,11 @@ export class FormService {
     return this.repo.findOneBy({ id });
   }
 
-  update(id: number, updateFormDto: UpdateFormDto) {
-    return `This action updates a #${id} form`;
+  async update(id: number, updateFormDto: UpdateFormDto) {
+    const form = await this.findOne(id);
+    assign(updateFormDto, form);
+    await this.repo.update(id, form);
+    return form;
   }
 
   remove(id: number) {
