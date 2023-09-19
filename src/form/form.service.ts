@@ -35,6 +35,6 @@ export class FormService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} form`;
+    return this.repo.delete({ id });
   }
 }
