@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Car } from 'src/car/entities/car.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Form {
@@ -10,4 +17,7 @@ export class Form {
   email: string;
   @Column()
   telefone: string;
+  @ManyToOne(() => Car, { nullable: false, eager: true })
+  @JoinColumn({ name: 'car_id' })
+  car: Car;
 }

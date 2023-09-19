@@ -5,16 +5,20 @@ import { Repository } from 'typeorm';
 import { Form } from './entities/form.entity';
 import { assign } from 'src/utils/assign';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Car } from 'src/car/entities/car.entity';
 
 @Injectable()
 export class FormService {
   constructor(
     @InjectRepository(Form)
     private readonly repo: Repository<Form>,
+    @InjectRepository(Car)
+    private readonly carRepo: Repository<Car>,
   ) {}
   async create(createFormDto: CreateFormDto) {
     const form = await this.repo.create();
     assign(createFormDto, form);
+    form.car = await this.carRepo.findOneBy({ id: createFormDto.car_id });
     await this.repo.save(form);
     return form;
   }
