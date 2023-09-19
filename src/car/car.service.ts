@@ -25,7 +25,12 @@ export class CarService {
   }
 
   async findOne(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.find({
+      where: { id },
+      relations: {
+        forms: true,
+      },
+    });
   }
 
   async update(id: number, updateCarDto: UpdateCarDto) {

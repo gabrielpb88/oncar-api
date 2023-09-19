@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Form } from 'src/form/entities/form.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Car {
@@ -12,4 +19,6 @@ export class Car {
   ano: number;
   @Column()
   preco: number;
+  @OneToMany((type) => Form, (form) => form.car)
+  forms: Form[];
 }

@@ -17,7 +17,7 @@ export class Form {
   email: string;
   @Column()
   telefone: string;
-  @ManyToOne(() => Car, { nullable: false, eager: true })
+  @ManyToOne(() => Car, { nullable: false, eager: false })
   @JoinColumn({ name: 'car_id' })
   car: Car;
 }
