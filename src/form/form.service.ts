@@ -19,12 +19,12 @@ export class FormService {
     return form;
   }
 
-  findAll() {
-    return `This action returns all form`;
+  async findAll() {
+    return this.repo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} form`;
+  async findOne(id: number) {
+    return this.repo.findOneBy({ id });
   }
 
   update(id: number, updateFormDto: UpdateFormDto) {
