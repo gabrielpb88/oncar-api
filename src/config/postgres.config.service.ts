@@ -1,8 +1,9 @@
-import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { Car } from '../car/entities/car.entity';
-
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+
+import { Car } from '../car/entities/car.entity';
+import { Form } from 'src/form/entities/form.entity';
 
 @Injectable()
 export class PostgresConfigService implements TypeOrmOptionsFactory {
@@ -18,9 +19,9 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('DB_USER') || 'postgres',
       password: this.configService.get<string>('DB_PASSWORD') || 'postgres',
       database: this.configService.get<string>('DB_NAME') || 'oncar',
-      entities: [Car],
-      synchronize: process.env.NODE_ENV === 'development',
-      logging: process.env.NODE_ENV === 'development',
+      entities: [Car, Form],
+      synchronize: process.env.NODE_ENV !== 'production',
+      logging: process.env.NODE_ENV !== 'production',
     };
   }
 }
